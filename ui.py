@@ -3,33 +3,36 @@ from Tkinter import *
 class App:
 
     def __init__(self, master):
+        var = StringVar()
 
         frame = Frame(master)
         frame.grid()
 
-        Checkbutton(master, text="Strength", variable = valArray[0], 
-            onvalue = "str", offvalue = 0).grid(row = 0, sticky=W)
-        
-        Checkbutton(master, text="Dexterity", variable = valArray[1],
-            onvalue = "dex", offvalue = 0).grid(row = 1, sticky=W)
-        
-        Checkbutton(master, text="Intelligence", variable = valArray[2], 
-            onvalue = "int", offvalue = 0).grid(row = 2, sticky=W)
+        var1 = IntVar()
+        Checkbutton(master, text="Strength", variable = var1).grid(row = 0, column = 0, sticky=W)
 
-        Checkbutton(master, text="Constitution", variable = valArray[3], 
-            onvalue = "con", offvalue = 0).grid(row = 3, sticky=W)
+        var2 = IntVar()
+        Checkbutton(master, text="Dexterity", variable = var2).grid(row = 1, column = 0, sticky=W)
 
-        Checkbutton(master, text="Wisdom", variable = valArray[4], 
-            onvalue = "wis", offvalue = 0).grid(row = 4, sticky=W)
-        
-        Checkbutton(master, text="Charisma", variable = valArray[5], 
-            onvalue = "char", offvalue = 0).grid(row = 5, sticky=W)
+        var3 = IntVar()
+        Checkbutton(master, text="Intelligence", variable = var3).grid(row = 2, column = 0, sticky=W)
 
-        Button(frame, text="Submit", command = self.submit(valArray)).grid(row = 6, sticky=W)
+        var4 = IntVar()
+        Checkbutton(master, text="Constitution", variable = var4).grid(row = 3, column = 0, sticky=W)
 
+        var5 = IntVar()
+        Checkbutton(master, text="Wisdom", variable = var5).grid(row = 4, column = 0, sticky=W)
 
-    def submit(self, valArray):
-        print(valArray)
+        var6 = IntVar()
+        Checkbutton(master, text="Charisma", variable = var6).grid(row = 5, column = 0, sticky=W)
+
+        var7 = IntVar()
+        Checkbutton(master, text="Psionics", variable = var7).grid(row = 6, column = 0, sticky=W)
+
+        OptionMenu(master, var, "2d6", "4d6", "Dice").grid(row = 0, column = 1, sticky=W)
+
+    def submit(self):
+        print("Chickity check yoself\n")
 
 root = Tk()
 
