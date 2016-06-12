@@ -5,6 +5,12 @@ class App:
     def __init__(self, master):
         system  = StringVar()
         setting = StringVar()
+        classChoice = StringVar()
+        classList = []
+        statChoices = []
+        system.set("2d6")
+        setting.set("Fantasy")
+        classChoice.set("Scout")
 
         frame = Frame(master)
         frame.grid()
@@ -36,14 +42,16 @@ class App:
         OptionMenu(master, system, "2d6", "4d6", "Dice").grid(row = 1, column = 2, sticky=W)
 
         Label(master, text = "Setting").grid(row = 2, column = 2, sticky=W)
-        OptionMenu(master, setting, "Fantasy", "Science Fiction", "Real Life o.O").grid(row = 3, column = 2, sticky=W)
+        OptionMenu(master, setting, "Fantasy", "Science Fiction", "Real Life o.O", command = lambda: self.getClasses(setting)).grid(row = 3, column = 2, sticky=W)
 
         Label(master, text = "Class").grid(row = 5, column = 2, sticky=W)
+        OptionMenu(master, classChoice, classList).grid(row = 6, column = 2, sticky = W)
 
-        self.getClass(setting)
+        button = Button(master, text="Submit", command = lambda: self.submit()).grid(row = 8, column = 1, sticky = W)
 
-    def getClass(self, setting):
-        classes = open("classes.txt").read().splitlines()
+    def getClasses(self, setting):
+        classes = json.load(open("classes.json").read())
+        self.classList.extend(json.dump(classes[setting]))
 
     def submit(self):
         print("Chickity check yoself\n")
@@ -54,3 +62,4 @@ app = App(root)
 
 root.mainloop()
 root.destroy()
+
