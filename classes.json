@@ -1,0 +1,26 @@
+{
+  "Fantasy": [
+      "Rogue",
+      "Fighter",
+      "Monk",
+      "Merchant",
+      "Entertainer"
+    ],
+    "Science Fiction": [
+        "Merchant",
+        "Army",
+        "Pilot",
+        "Noble",
+        "Scholar",
+        "Spy",
+        "Scout",
+        "Bounty Hunter"
+    ],
+  "Real Life": [
+      "Student",
+      "Software Engineer",
+      "Teacher",
+      "Army",
+      "Politician"
+    ]
+}
