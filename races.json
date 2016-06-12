@@ -1,0 +1,16 @@
+{
+  "Fantasy": [
+    "Orc",
+    "Elf",
+    "Human",
+    "Gnome"
+  ],
+  "Sci-Fi": [
+    "Human",
+    "Aslan",
+    "Martian"
+  ],
+  "IRL": [
+    "Human"
+  ]
+}
