@@ -6,7 +6,7 @@
       "Merchant",
       "Entertainer"
     ],
-    "Science Fiction": [
+    "Sci-Fi": [
         "Merchant",
         "Army",
         "Pilot",
@@ -16,7 +16,7 @@
         "Scout",
         "Bounty Hunter"
     ],
-  "Real Life": [
+  "IRL": [
       "Student",
       "Software Engineer",
       "Teacher",
