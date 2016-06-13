@@ -10,7 +10,6 @@ class App:
         self.setting = StringVar(master)
         self.classChoice = StringVar(master)
         self.race = StringVar(master)
-        self.statChoices = []
         self.system.set("2d6")
         self.setting.set("Fantasy")
         self.classChoice.set("Scout")
@@ -73,15 +72,18 @@ class App:
         self.raceMenu = OptionMenu(self.master, self.race, *raceList).grid(row = 8, column = 2, sticky = W)
 
     def submit(self):
-        self.statChoices.append(self.var1.get())
-        self.statChoices.append(self.var2.get())
-        self.statChoices.append(self.var3.get())
-        self.statChoices.append(self.var4.get())
-        self.statChoices.append(self.var5.get())
-        self.statChoices.append(self.var6.get())
-        self.statChoices.append(self.var7.get())
+        statChoices = []
+        statChoices.append(self.var1.get())
+        statChoices.append(self.var2.get())
+        statChoices.append(self.var3.get())
+        statChoices.append(self.var4.get())
+        statChoices.append(self.var5.get())
+        statChoices.append(self.var6.get())
+        statChoices.append(self.var7.get())
 
-        character = charGen.Create(self.statChoices, self.system, self.setting,  self.classChoice, self.race)
+        print(len(statChoices))
+
+        character = charGen.Create(self.system.get(), self.setting.get(),  self.classChoice.get(), self.race.get(), statChoices)
 
 root = Tk()
 
