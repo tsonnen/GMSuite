@@ -81,9 +81,19 @@ class App:
         statChoices.append(self.var6.get())
         statChoices.append(self.var7.get())
 
-        print(len(statChoices))
+        character = charGen.Character(self.system.get(), self.setting.get(),  self.classChoice.get(), self.race.get(), statChoices)
 
-        character = charGen.Create(self.system.get(), self.setting.get(),  self.classChoice.get(), self.race.get(), statChoices)
+        pop = PopUp(Tk(), character.stringCharacter)
+
+class PopUp:
+    def __init__(self, master, charString):
+        frame = Frame(master)
+        frame.grid()
+
+        Text(master, charString).grid(row = 0, column = 0, sticky=W)
+        Button(master, "Close").grid(row = 1, column = 0, sticky=W)
+
+
 
 root = Tk()
 
