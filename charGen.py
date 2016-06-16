@@ -1,4 +1,4 @@
-''' Tim Sonnen  6/12/2016
+''' Tim Sonnen  6/15/2016
     v. .01
     Character Generator for a tabletop RPG
      

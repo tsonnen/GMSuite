@@ -83,13 +83,24 @@ class App(tk.Frame):
 
         character = charGen.Character(self.system.get(), self.setting.get(),  self.classChoice.get(), self.race.get(), statChoices)
 
-        strChar = character.stringCharacter()
-        self.PopUp(strChar)
+        self.PopUp(character)
 
-    def PopUp(self, stringCharacter):
+    def PopUp(self, character):
         t = tk.Toplevel(self)
-        tk.Label(t, text=stringCharacter).grid(row = 0, column = 0, sticky = tk.W)
-        tk.Button(t, text = "Close").grid(row = 1, column = 0, sticky = tk.W)
+        tk.Label(t, text=character.name + "\t" + character.race).grid(row = 0, column = 0, sticky = tk.W)
+        skillStr = ""
+        
+        for i in range(0,len(character.charStats)):
+            tk.Label(t, text=character.charStats[i][0] + ": " + str(character.charStats[i][1])).grid(row = i + 1, column = 0, sticky = tk.W)
+
+        for x in range(0,len(character.skills)):
+            skillStr += character.skills[x][0] + "  " + str(character.skills[x][1]) + ", "
+            if x%4 == 0:
+                skillStr += "\n"
+
+        tk.Label(t, text = skillStr, justify=tk.LEFT).grid(row = 8, column = 0, sticky =tk.W)
+
+        tk.Button(t, text = "Close").grid(row = 9, column = 0, sticky = tk.W)
 
 app = App()
 app.master.title('Character')
