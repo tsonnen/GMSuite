@@ -2,7 +2,7 @@
     v. .01
     Character Generator for a tabletop RPG
      
-    Creates a character with minimal to no input from the user
+    Creates a charcter with the input of Class, Race, Setting, and System
 '''
 import time, sys, random, string, json
 

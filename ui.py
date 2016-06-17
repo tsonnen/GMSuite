@@ -1,3 +1,8 @@
+''' Tim Sonnen   6/16/2016
+    Provides a Ui that allows the user to easily
+    enter in the seed information to make a character
+'''
+
 import Tkinter as tk
 import json
 import charGen
