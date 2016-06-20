@@ -1,4 +1,4 @@
-''' Tim Sonnen  6/15/2016
+''' Tim Sonnen  6/19/2016
     v. .01
     Character Generator for a tabletop RPG
      
@@ -61,4 +61,3 @@ class Character:
         for x in range(0, len(self.skills)):
             charstr += self.skills[x][0] + "  " + str(self.skills[x][1]) + ", "
         return charstr
-
