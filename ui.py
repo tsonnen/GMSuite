@@ -1,112 +1,130 @@
-''' Tim Sonnen   6/16/2016
+''' Tim Sonnen   6/18/2016
     Provides a Ui that allows the user to easily
     enter in the seed information to make a character
 '''
 
-import Tkinter as tk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk as gtk
 import json
 import charGen
 
-class App(tk.Frame):
+class Handler:
+    def mainWindow_OnDeleteWindow (self, *args):
+        Gtk.main_quit(*args)
 
-    def __init__(self, master=None):
-        tk.Frame.__init__(self, master)
+    def submit_OnClick (self, button):
+        submit()
 
-        self.system  = tk.StringVar(self)
-        self.setting = tk.StringVar(self)
-        self.classChoice = tk.StringVar(self)
-        self.race = tk.StringVar(self)
-        self.system.set("2d6")
-        self.setting.set("Fantasy")
-        self.classChoice.set("Scout")
+    def setting_OnChange(self, comboBox):
+        print("hello")
 
-        self.grid()
 
-        tk.Label(self, text = "Stats").grid(row = 0, column = 0, sticky=tk.W)
+class charGenUI:
+    def __init__(self):
+        builder = gtk.Builder()
+        builder.add_from_file("charGen.glade")
 
-        self.var1 = tk.IntVar(self)
-        tk.Checkbutton(self, text="Strength", variable = self.var1).grid(row = 1, column = 0, sticky=tk.W)
+        window = builder.get_object("MainWindow")
 
-        self.var2 = tk.IntVar(self)
-        tk.Checkbutton(self, text="Dexterity", variable = self.var2).grid(row = 2, column = 0, sticky=tk.W)
+        self.systemChoices = builder.get_object("systemChoices")
+        self.settingChoices = builder.get_object("settingChoices")
+        self.raceChoices = builder.get_object("raceChoices")
+        self.classChoices = builder.get_object("classChoices")
+        self.submitButton = builder.get_object("submit")
 
-        self.var3 = tk.IntVar(self)
-        tk.Checkbutton(self, text="Intelligence", variable = self.var3).grid(row = 3, column = 0, sticky=tk.W)
 
-        self.var4 = tk.IntVar(self)
-        tk.Checkbutton(self, text="Constitution", variable = self.var4).grid(row = 4, column = 0, sticky=tk.W)
+        self.getSystems()
+        self.getSettings()
+        self.setting = self.settingChoices.get_active_text()
+        self.getClasses()
+        self.getRaces()
+        self.stats = open("stats.txt").read().splitlines()
+        self.settingChoices.connect("changed", self.setting_OnChange)
+        self.submitButton.connect("clicked", self.submit_OnClick)
 
-        self.var5 = tk.IntVar(self)
-        tk.Checkbutton(self, text="Wisdom", variable = self.var5).grid(row = 5, column = 0, sticky=tk.W)
+        window.show_all()
 
-        self.var6 = tk.IntVar(self)
-        tk.Checkbutton(self, text="Charisma", variable = self.var6).grid(row = 6, column = 0, sticky=tk.W)
+        gtk.main()
 
-        self.var7 = tk.IntVar(self)
-        tk.Checkbutton(self, text="Psionics", variable = self.var7).grid(row = 7, column = 0, sticky=tk.W)
+    def setting_OnChange(self, combo):
+        self.setting = self.settingChoices.get_active_text()
+        self.getClasses()
+        self.getRaces()
 
-        tk.Label(self, text  = "System").grid(row = 0, column = 2, sticky=tk.W)
-        tk.OptionMenu(self, self.system, "2d6", "4d6", "Dice").grid(row = 1, column = 2, sticky=tk.W)
 
-        tk.Label(self, text = "Setting").grid(row = 2, column = 2, sticky=tk.W)
-        tk.OptionMenu(self, self.setting, "Fantasy", "Sci-Fi", "IRL", 
-                   command = lambda x: self.updateMenus()).grid(row = 3, column = 2, sticky=tk.W)
+    def getSystems(self):
+        systems = open("systems.txt").read().splitlines()
 
-        tk.Label(self, text = "Class").grid(row = 5, column = 2, sticky=tk.W)
-        self.getClasses(self.setting.get())
+        for i in systems:
+            self.systemChoices.append_text(i)
 
-        tk.Label(self, text = "Race").grid(row = 7, column = 2, sticky = tk.W)
-        self.getRaces(self.setting.get())
+        self.systemChoices.set_active(0)
 
-        tk.Button(self, text="Submit", command = lambda: self.submit()).grid(row = 9, column = 1, sticky = tk.W)
+    def getSettings(self):
+        settings = open("settings.txt").read().splitlines()
 
-    def updateMenus(self):
-         self.getClasses(self.setting.get()) 
-         self.getRaces(self.setting.get())
+        for i in settings:
+            self.settingChoices.append_text(i)
 
-    def getClasses(self, setting):
+        self.settingChoices.set_active(0)
+
+    def getClasses(self):
         classes = json.load(open("classes.json"))
-        classList = classes[setting]
-        self.classChoice.set(classList[0])
-        self.classMenu = tk.OptionMenu(self, self.classChoice, *classList).grid(row = 6, column = 2, sticky = tk.W)
+        classList = classes[self.setting]
 
-    def getRaces(self, setting):
+        self.classChoices.remove_all()
+        
+        for i in classList:
+            self.classChoices.append_text(i)
+
+        self.classChoices.set_active(0)
+
+    def getRaces(self):
         races = json.load(open("races.json"))
-        raceList = races[setting]
-        self.race.set(raceList[0])
-        self.raceMenu = tk.OptionMenu(self, self.race, *raceList).grid(row = 8, column = 2, sticky = tk.W)
+        raceList = races[self.setting]
 
-    def submit(self):
-        statChoices = []
-        statChoices.append(self.var1.get())
-        statChoices.append(self.var2.get())
-        statChoices.append(self.var3.get())
-        statChoices.append(self.var4.get())
-        statChoices.append(self.var5.get())
-        statChoices.append(self.var6.get())
-        statChoices.append(self.var7.get())
+        self.raceChoices.remove_all()
+        
+        for i in raceList:
+             self.raceChoices.append_text(i)
 
-        character = charGen.Character(self.system.get(), self.setting.get(),  self.classChoice.get(), self.race.get(), statChoices)
+        self.raceChoices.set_active(0)
+
+    def submit_OnClick(self, button):
+        character = charGen.Character(self.systemChoices.get_active_text(), self.setting,  self.classChoices.get_active_text(), self.raceChoices.get_active_text(), self.stats)
 
         self.PopUp(character)
 
     def PopUp(self, character):
-        t = tk.Toplevel(self)
-        tk.Label(t, text=character.name + "\t" + character.race).grid(row = 0, column = 0, sticky = tk.W)
+        popUpBuilder = gtk.Builder()
+        popUpBuilder.add_from_file("charGen.glade")
+
+        popup = popUpBuilder.get_object("CharDisplay")
+
+        charName = popUpBuilder.get_object("nameLbl")
+        charRaceClass = popUpBuilder.get_object("raceClassLbl") 
+        charStats = popUpBuilder.get_object("statsLbl")
+        charSkills = popUpBuilder.get_object("skillsLbl")
+
+        charName.set_text(character.name)
+        charRaceClass.set_text(character.race + "/" + character.classChoice)
+
+        statStr = ""
         skillStr = ""
-        
-        for i in range(0,len(character.charStats)):
-            tk.Label(t, text=character.charStats[i][0] + ": " + str(character.charStats[i][1])).grid(row = i + 1, column = 0, sticky = tk.W)
 
         for x in range(0,len(character.skills)):
-            skillStr += character.skills[x][0] + "  " + str(character.skills[x][1]) + ", "
-            if x%4 == 0:
-                skillStr += "\n"
+            skillStr += character.skills[x][0] + " " + str(character.skills[x][1]) + ", " 
 
-        tk.Label(t, text = skillStr, justify=tk.LEFT).grid(row = 8, column = 0, sticky =tk.W)
+        for i in range(0,len(character.charStats)):
+            statStr += character.charStats[i][0] + ": " + str(character.charStats[i][1]) + "\n" 
 
-        tk.Button(t, text = "Close").grid(row = 9, column = 0, sticky = tk.W)
+        charStats.set_text(statStr)
+        charSkills.set_text(skillStr)
 
-app = App()
-app.master.title('Character')
-app.mainloop()
+        charSkills.set_line_wrap(True)
+        charSkills.set_size_request(-1, -1)
+
+        popup.show_all()
+
+app = charGenUI()
