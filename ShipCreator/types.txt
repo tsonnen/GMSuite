@@ -1,0 +1,7 @@
+Scout
+Merchant
+Fighter
+Laboratory
+Escort
+Freighter
+Yacht

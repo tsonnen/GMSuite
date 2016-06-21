@@ -9,17 +9,6 @@ from gi.repository import Gtk as gtk
 import json
 import charGen
 
-class Handler:
-    def mainWindow_OnDeleteWindow (self, *args):
-        Gtk.main_quit(*args)
-
-    def submit_OnClick (self, button):
-        submit()
-
-    def setting_OnChange(self, comboBox):
-        print("hello")
-
-
 class charGenUI:
     def __init__(self):
         builder = gtk.Builder()
