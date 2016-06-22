@@ -1,0 +1,16 @@
+{
+  "Standard": [
+    "Sphere",
+    "Cylinder",
+    "Rectangles"
+  ],
+  "Streamlined": [
+    "Wing",
+    "Disk",
+    "Wedge",
+    "Cone"
+  ],
+  "Distributed": [
+    "Several Sections"
+  ]
+}
