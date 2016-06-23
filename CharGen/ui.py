@@ -28,11 +28,16 @@ class charGenUI:
         self.setting = self.settingChoices.get_active_text()
         self.getClasses()
         self.getRaces()
-        self.stats = open("stats.txt").read().splitlines()
+
+        statsFile = open("stats.txt")
+
+        self.stats = statsFile.read().splitlines()
         self.settingChoices.connect("changed", self.setting_OnChange)
         self.submitButton.connect("clicked", self.submit_OnClick)
 
         window.show_all()
+
+        statsFile.close()
 
         gtk.main()
 
@@ -43,23 +48,30 @@ class charGenUI:
 
 
     def getSystems(self):
-        systems = open("systems.txt").read().splitlines()
+        systemFile = open("systems.txt")
+        systems    = systemFile.read().splitlines()
 
         for i in systems:
             self.systemChoices.append_text(i)
 
         self.systemChoices.set_active(0)
 
+        systemFile.close()
+
     def getSettings(self):
-        settings = open("settings.txt").read().splitlines()
+        settingsFile = open("settings.txt")
+        settings     = settingsFile.read().splitlines()
 
         for i in settings:
             self.settingChoices.append_text(i)
 
         self.settingChoices.set_active(0)
 
+        settingsFile.close()
+
     def getClasses(self):
-        classes = json.load(open("classes.json"))
+        classFile = open("classes.json")
+        classes = json.load(classFile)
         classList = classes[self.setting]
 
         self.classChoices.remove_all()
@@ -69,8 +81,11 @@ class charGenUI:
 
         self.classChoices.set_active(0)
 
+        classFile.close()
+
     def getRaces(self):
-        races = json.load(open("races.json"))
+        racesFile = open("races.json")
+        races = json.load(racesFile)
         raceList = races[self.setting]
 
         self.raceChoices.remove_all()
@@ -79,6 +94,8 @@ class charGenUI:
              self.raceChoices.append_text(i)
 
         self.raceChoices.set_active(0)
+
+        racesFile.close()
 
     def submit_OnClick(self, button):
         character = charGen.Character(self.systemChoices.get_active_text(), self.setting,  self.classChoices.get_active_text(), self.raceChoices.get_active_text(), self.stats)
