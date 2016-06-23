@@ -7,7 +7,7 @@
 import time, sys, random, string, json
 
 class Character:
-    def __init__(self, system, setting,  classChoice, race, statChoices = [] ):
+    def __init__(self, system, classChoice, race, statChoices = [] ):
         self.race = race
         self.classChoice = classChoice
         self.charStats = [["Strength", 0],["Dexterity", 0],["Intelligence", 0],["Constitution", 0],["Wisdom", 0],["Charisma", 0],["Psionics",0]]

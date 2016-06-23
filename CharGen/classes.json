@@ -1,26 +1,14 @@
 {
-  "Fantasy": [
-      "Rogue",
-      "Fighter",
-      "Monk",
-      "Merchant",
-      "Entertainer"
-    ],
-    "Sci-Fi": [
-        "Merchant",
-        "Army",
-        "Pilot",
-        "Noble",
-        "Scholar",
-        "Spy",
-        "Scout",
-        "Bounty Hunter"
-    ],
-  "IRL": [
-      "Student",
-      "Software Engineer",
-      "Teacher",
-      "Army",
-      "Politician"
-    ]
+ "Rogue":[
+    "Persuade",
+    "Decpetion"
+ ],
+ "Fighter": [
+    "Weapons", 
+    "Fighting"
+ ],
+ "Monk": [
+    "Religion",
+    "History"
+ ]
 }

@@ -1,4 +1,4 @@
-''' Tim Sonnen   6/18/2016
+''' Tim Sonnen   6/22/2016
     Provides a Ui that allows the user to easily
     enter in the seed information to make a character
 '''
@@ -17,22 +17,18 @@ class charGenUI:
         window = builder.get_object("MainWindow")
 
         self.systemChoices = builder.get_object("systemChoices")
-        self.settingChoices = builder.get_object("settingChoices")
         self.raceChoices = builder.get_object("raceChoices")
         self.classChoices = builder.get_object("classChoices")
         self.submitButton = builder.get_object("submit")
 
 
         self.getSystems()
-        self.getSettings()
-        self.setting = self.settingChoices.get_active_text()
         self.getClasses()
         self.getRaces()
 
         statsFile = open("stats.txt")
 
         self.stats = statsFile.read().splitlines()
-        self.settingChoices.connect("changed", self.setting_OnChange)
         self.submitButton.connect("clicked", self.submit_OnClick)
 
         window.show_all()
@@ -40,12 +36,6 @@ class charGenUI:
         statsFile.close()
 
         gtk.main()
-
-    def setting_OnChange(self, combo):
-        self.setting = self.settingChoices.get_active_text()
-        self.getClasses()
-        self.getRaces()
-
 
     def getSystems(self):
         systemFile = open("systems.txt")
@@ -58,21 +48,10 @@ class charGenUI:
 
         systemFile.close()
 
-    def getSettings(self):
-        settingsFile = open("settings.txt")
-        settings     = settingsFile.read().splitlines()
-
-        for i in settings:
-            self.settingChoices.append_text(i)
-
-        self.settingChoices.set_active(0)
-
-        settingsFile.close()
-
     def getClasses(self):
         classFile = open("classes.json")
         classes = json.load(classFile)
-        classList = classes[self.setting]
+        classList = classes
 
         self.classChoices.remove_all()
         
@@ -84,13 +63,10 @@ class charGenUI:
         classFile.close()
 
     def getRaces(self):
-        racesFile = open("races.json")
-        races = json.load(racesFile)
-        raceList = races[self.setting]
-
-        self.raceChoices.remove_all()
+        racesFile = open("races.txt")
+        races = racesFile.read().splitlines()
         
-        for i in raceList:
+        for i in races:
              self.raceChoices.append_text(i)
 
         self.raceChoices.set_active(0)
@@ -98,7 +74,7 @@ class charGenUI:
         racesFile.close()
 
     def submit_OnClick(self, button):
-        character = charGen.Character(self.systemChoices.get_active_text(), self.setting,  self.classChoices.get_active_text(), self.raceChoices.get_active_text(), self.stats)
+        character = charGen.Character(self.systemChoices.get_active_text(), self.classChoices.get_active_text(), self.raceChoices.get_active_text(), self.stats)
 
         self.PopUp(character)
 
