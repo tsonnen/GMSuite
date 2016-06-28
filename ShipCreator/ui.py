@@ -17,11 +17,9 @@ class shipCreatorUI:
         window = builder.get_object("MainWindow")
 
         self.typeChoice = builder.get_object("typeChoice")
-        self.sizeChoice = builder.get_object("sizeChoice")
         self.submitButton = builder.get_object("submit")
 
         self.getTypes()
-        self.getSizes()
 
         self.submitButton.connect("clicked", self.submit_OnClick)
 
@@ -30,20 +28,15 @@ class shipCreatorUI:
         gtk.main()
 
     def getTypes (self):
-        types = open("types.txt").read().splitlines()
+        typesFile = open("types.json")
+        types = json.load(typesFile)
 
         for i in types:
             self.typeChoice.append_text(i)
 
         self.typeChoice.set_active(0)
 
-    def getSizes (self):
-        sizes = open("sizes.txt").read().splitlines()
-
-        for i in sizes:
-            self.sizeChoice.append_text(i)
-
-        self.sizeChoice.set_active(0)
+        typesFile.close()
 
     def submit_OnClick(self, button):
         ship = shipCreator.Ship(self.typeChoice.get_active_text(), self.sizeChoice.get_active_text())
