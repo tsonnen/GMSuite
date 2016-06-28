@@ -1,0 +1,10 @@
+{
+  "Scout": {
+    "class": "Military",
+    "size": "A"
+  },
+  "Merchant": {
+    "class": "Civilian",
+    "Size": "B"
+  }
+}
