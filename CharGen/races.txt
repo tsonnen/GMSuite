@@ -1,0 +1,6 @@
+Human
+Elf
+Gnome
+Aslan
+Martian
+Orc
