@@ -5,6 +5,6 @@
   },
   "Merchant": {
     "class": "Civilian",
-    "Size": "B"
+    "size": "B"
   }
 }

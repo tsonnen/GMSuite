@@ -8,12 +8,17 @@
 import time, sys, random, string, json
 
 class Ship:
-    def __init__(self, shipType, shipSize):
+    def __init__(self, shipType):
         self.shipType = shipType
-        self.shipSize = shipSize
-        self.shipConfig = self.getConfig()
+        self.shipSize = ""
+        self.shipConfig = ""
 
-    def getConfig(self):
-        configs = json.load(open("configs.json"))
-        print(random.choice(configs["Standard"]))
-        return random.choice(configs["Standard"])
+        self.getShipInfo()
+
+    def getShipInfo(self):
+        infoFile = open("types.json")
+        infoList = json.load(infoFile)
+
+        self.shipSize = infoList[self.shipType]['size']
+        self.shipClass = infoList[self.shipType]['class']
+

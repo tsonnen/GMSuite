@@ -39,6 +39,6 @@ class shipCreatorUI:
         typesFile.close()
 
     def submit_OnClick(self, button):
-        ship = shipCreator.Ship(self.typeChoice.get_active_text(), self.sizeChoice.get_active_text())
+        ship = shipCreator.Ship(self.typeChoice.get_active_text())
 
 app = shipCreatorUI()
