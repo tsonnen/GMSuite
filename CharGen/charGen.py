@@ -10,15 +10,16 @@ class Character:
     def __init__(self, system, classChoice, race, statChoices = [] ):
         self.race = race
         self.classChoice = classChoice
-        self.charStats = [["Strength", 0],["Dexterity", 0],["Intelligence", 0],["Constitution", 0],["Wisdom", 0],["Charisma", 0],["Psionics",0]]
         self.getStats(system, statChoices)
         self.name = self.getName(race)
         self.skills = self.getSkills()
         self.stringCharacter()
 
     def getStats(self, system, statChoices = [] ):
+        self.charStats = []
+
         for i in range(0,len(statChoices)):
-            self.charStats[i][1] = self.getStatVal(system)
+            self.charStats.append([statChoices[i], self.getStatVal(system)])
 
     def getStatVal(self, system):
         if (system == "Dice"):
