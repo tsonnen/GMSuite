@@ -1,4 +1,4 @@
-''' Tim Sonnen 6/28/2016
+''' 7/1/2016
     v.01
     Starship Generator for a tabletop RPG
 
@@ -18,6 +18,11 @@ class Ship:
         self.getShipInfo()
         self.getArmor()
         self.getSpecial()
+        self.getDrives()
+        self.getElectronics()
+        self.getRooms()
+        self.getVehicles()
+
 
     def getShipInfo(self):
         infoFile = open("types.json")
@@ -45,4 +50,53 @@ class Ship:
             if random.randint(1, 100) > 50:
                 self.shipSpecial.append(line)
 
-        print(self.shipSpecial)
+        specialFile.close()
+
+    def getDrives(self):
+        driveFile = open("drives.txt")
+        driveList = driveFile.read().splitlines()
+
+        self.shipDrives = []
+
+        for line in driveList:
+            self.shipDrives.append([line, random.choice(string.ascii_uppercase)])
+
+        driveFile.close()
+
+    def getElectronics(self):
+        electronicsFile = open('electronics.json')
+        electronicsList = json.load(electronicsFile)
+        electronicsType = random.choice(electronicsList['electronics'])
+
+        self.shipElectronics = Electronics(electronicsType['system'], electronicsType['techLevel'], electronicsType['diceModifier'], electronicsType['contents'])
+
+        self.shipComputer = random.randint(0,8)
+
+        electronicsFile.close()
+
+    def getRooms(self):
+        self.shipStateRooms = random.randint(int(self.shipSize)/100, int(self.shipSize)/50)
+
+        if random.randint(0,100) > 50:  
+            self.shipLowPassageBerths = random.randint(0, int(self.shipSize)/10)
+        else:
+            self.shipLowPassageBerths = 0
+
+    def getVehicles(self):
+        vehicleFile = open("vehicles.txt")
+        vehicleList = vehicleFile.read().splitlines()
+
+        self.shipVehicles = []
+
+        for line in vehicleList:
+            if random.randint(0, int(self.shipSize)/10)  < random.randint(0, int(self.shipSize)): 
+                self.shipVehicles.append([line, random.randint(0, int(self.shipSize)/100)])
+        
+        print(self.shipVehicles)
+
+class Electronics:
+    def __init__(self, system, techLevel, diceModifier, contents= []):
+        self.elctroSystem = system
+        self.electroTechLevel = techLevel
+        self.electroDiceModifier = diceModifier
+        self.electroContents = contents

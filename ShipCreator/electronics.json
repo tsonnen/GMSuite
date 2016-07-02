@@ -1,0 +1,8 @@
+{ 
+  "electronics":[
+    {"system":"Standard", "techLevel":"8", "diceModifier":"-4", "contents":["Radar", "Lidar"]},
+    {"system":"Basic Civilian", "techLevel":"9", "diceModifier":"-2", "contents":["Radar", "Lidar"]},
+    {"system":"Basic Military", "techLevel":"10", "diceModifier":"+0", "contents":["Radar", "Lidar", "Jammers"]},
+    {"system":"Advanced", "techLevel":"11", "diceModifier":"+1", "contents":["Radar", "Lidar", "DEsitometer", "Jammers"]},
+    {"system":"Very Advanced", "techLevel":"12", "diceModifier":"+2", "contents":["Radar", "Lidar","Densitometer","Jammers", "Neural Activity Sensor"]}
+]}
