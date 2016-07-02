@@ -1,4 +1,4 @@
-''' 7/1/2016
+''' 7/2/2016
     v.01
     Starship Generator for a tabletop RPG
 
@@ -92,7 +92,28 @@ class Ship:
             if random.randint(0, int(self.shipSize)/10)  < random.randint(0, int(self.shipSize)): 
                 self.shipVehicles.append([line, random.randint(0, int(self.shipSize)/100)])
         
-        print(self.shipVehicles)
+    def getWeapons(self):
+        if self.shipType == "military":
+            weaponFile = open("weapon.json")
+            weaponList = json.load(weaponFile)
+
+            mountList = json.load(weaponList['mounts'])
+            typeList = json.load(weaponList['types'])
+
+            numWeapons = random.randint(int(self.shipSize)/1000, int(self.shipSize)/100)
+
+            self.shipWeapons = []
+
+            for i in range(0, numWeapons):
+                mountType = random.choice(mountList)
+                mountContents = []
+
+                for i in range(0, int(mountType['ports'])):
+                    mountContents.append(random.choice(typeList))
+
+                self.shipWeapons.append(Weapon(mountType['mountName'], mountContents))
+        else:
+            self.shipWeapons = ['None']
 
 class Electronics:
     def __init__(self, system, techLevel, diceModifier, contents= []):
@@ -100,3 +121,8 @@ class Electronics:
         self.electroTechLevel = techLevel
         self.electroDiceModifier = diceModifier
         self.electroContents = contents
+
+class Weapons:
+    def __init__(self, mountType, mountContents= []):
+        self.mountType = mountType
+        self.mountContens = mountContents
