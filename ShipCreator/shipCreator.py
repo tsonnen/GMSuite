@@ -22,7 +22,7 @@ class Ship:
         self.getElectronics()
         self.getRooms()
         self.getVehicles()
-
+        self.getWeapons()
 
     def getShipInfo(self):
         infoFile = open("types.json")
@@ -68,7 +68,7 @@ class Ship:
         electronicsList = json.load(electronicsFile)
         electronicsType = random.choice(electronicsList['electronics'])
 
-        self.shipElectronics = Electronics(electronicsType['system'], electronicsType['techLevel'], electronicsType['diceModifier'], electronicsType['contents'])
+        self.shipElectronics = electronicsType['system']
 
         self.shipComputer = random.randint(0,8)
 
@@ -93,16 +93,16 @@ class Ship:
                 self.shipVehicles.append([line, random.randint(0, int(self.shipSize)/100)])
         
     def getWeapons(self):
-        if self.shipType == "military":
+        self.shipWeapons = []
+
+        if self.shipClass == "military":
             weaponFile = open("weapon.json")
             weaponList = json.load(weaponFile)
 
-            mountList = json.load(weaponList['mounts'])
-            typeList = json.load(weaponList['types'])
+            mountList = weaponList['mounts']
+            typeList = weaponList['types']
 
             numWeapons = random.randint(int(self.shipSize)/1000, int(self.shipSize)/100)
-
-            self.shipWeapons = []
 
             for i in range(0, numWeapons):
                 mountType = random.choice(mountList)
@@ -112,17 +112,8 @@ class Ship:
                     mountContents.append(random.choice(typeList))
 
                 self.shipWeapons.append(Weapon(mountType['mountName'], mountContents))
-        else:
-            self.shipWeapons = ['None']
 
-class Electronics:
-    def __init__(self, system, techLevel, diceModifier, contents= []):
-        self.elctroSystem = system
-        self.electroTechLevel = techLevel
-        self.electroDiceModifier = diceModifier
-        self.electroContents = contents
-
-class Weapons:
+class Weapon:
     def __init__(self, mountType, mountContents= []):
         self.mountType = mountType
-        self.mountContens = mountContents
+        self.mountContents = mountContents

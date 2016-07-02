@@ -40,5 +40,54 @@ class shipCreatorUI:
 
     def submit_OnClick(self, button):
         ship = shipCreator.Ship(self.typeChoice.get_active_text())
+        
+        self.PopUp(ship)
+
+    def PopUp(self, ship):
+        popUpBuilder = gtk.Builder()
+        popUpBuilder.add_from_file("ShipCreator.glade")
+
+        popup = popUpBuilder.get_object("ShipDisplay")
+
+        shipInfo = popUpBuilder.get_object("infoLbl")
+        shipSpecial = popUpBuilder.get_object("specialLbl")
+        shipArmor = popUpBuilder.get_object("armorLbl")
+        shipDrives = popUpBuilder.get_object("drivesLbl")
+        shipElectronics = popUpBuilder.get_object("electronicsLbl")
+        shipRooms = popUpBuilder.get_object("roomsLbl")
+        shipVehicles = popUpBuilder.get_object("vehiclesLbl")
+        shipWeapons = popUpBuilder.get_object("weaponsLbl")
+
+        specialStr = ""
+        driveStr = ""
+        vehicleStr = ""
+        weaponStr = ""
+
+        for special in ship.shipSpecial:
+            specialStr += special + "\n"
+        
+        for drive in ship.shipDrives:
+            driveStr += drive[0] + ":" + drive[1] + "\n" 
+
+        for vehicle in ship.shipVehicles:
+            vehicleStr +=  str(vehicle[1]) + " "  + vehicle[0] + "\n"
+
+        for weapon in ship.shipWeapons:
+            weaponStr += weapon.mountType + "\n"
+
+            for item in weapon.mountContents:
+                weaponStr += "\t" + item + "\n"
+
+        shipInfo.set_text(ship.shipType + " " + ship.shipSize + " tons")
+        shipArmor.set_text(ship.shipArmor[0] + " : " + str(ship.shipArmor[1]) + " protection")
+        shipSpecial.set_text(specialStr)
+        shipDrives.set_text(driveStr)
+        shipRooms.set_text(str(ship.shipStateRooms) + " State rooms\n"  + str(ship.shipLowPassageBerths) + " Low passage berths")
+        shipElectronics.set_text("Computer: " + str(ship.shipComputer) + "\n" + ship.shipElectronics + "Level electronics" )
+        shipVehicles.set_text(vehicleStr)
+        shipWeapons.set_text(weaponStr)
+
+
+        popup.show_all()
 
 app = shipCreatorUI()
