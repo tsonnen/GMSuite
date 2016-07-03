@@ -63,27 +63,27 @@ class shipCreatorUI:
         vehicleStr = ""
         weaponStr = ""
 
-        for special in ship.shipSpecial:
+        for special in ship.Special:
             specialStr += special + "\n"
         
-        for drive in ship.shipDrives:
+        for drive in ship.Drives:
             driveStr += drive[0] + ":" + drive[1] + "\n" 
 
-        for vehicle in ship.shipVehicles:
+        for vehicle in ship.Vehicles:
             vehicleStr +=  str(vehicle[1]) + " "  + vehicle[0] + "\n"
 
-        for weapon in ship.shipWeapons:
+        for weapon in ship.Weapons:
             weaponStr += weapon.mountType + "\n"
 
             for item in weapon.mountContents:
                 weaponStr += "\t" + item + "\n"
 
-        shipInfo.set_text(ship.shipType + " " + ship.shipSize + " tons")
-        shipArmor.set_text(ship.shipArmor[0] + " : " + str(ship.shipArmor[1]) + " protection")
+        shipInfo.set_text(ship.Type + " " + ship.Size + " tons")
+        shipArmor.set_text(ship.Armor[0] + " : " + str(ship.Armor[1]) + " protection")
         shipSpecial.set_text(specialStr)
         shipDrives.set_text(driveStr)
-        shipRooms.set_text(str(ship.shipStateRooms) + " State rooms\n"  + str(ship.shipLowPassageBerths) + " Low passage berths")
-        shipElectronics.set_text("Computer: " + str(ship.shipComputer) + "\n" + ship.shipElectronics + "Level electronics" )
+        shipRooms.set_text(str(ship.StateRooms) + " State rooms\n"  + str(ship.LowPassageBerths) + " Low passage berths")
+        shipElectronics.set_text("Computer: " + str(ship.Computer) + "\n" + ship.Electronics + "Level electronics" )
         shipVehicles.set_text(vehicleStr)
         shipWeapons.set_text(weaponStr)
 

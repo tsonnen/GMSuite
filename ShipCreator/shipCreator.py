@@ -13,7 +13,7 @@ import json
 
 class Ship:
     def __init__(self, shipType):
-        self.shipType = shipType
+        self.Type = shipType
 
         self.getShipInfo()
         self.getArmor()
@@ -28,27 +28,27 @@ class Ship:
         infoFile = open("types.json")
         infoList = json.load(infoFile)
 
-        self.shipSize = infoList[self.shipType]['size']
-        self.shipClass = infoList[self.shipType]['class']
+        self.Size = infoList[self.Type]['size']
+        self.Class = infoList[self.Type]['class']
 
     def getArmor(self):
         armorFile = open("armor.json")
         armorList = json.load(armorFile)
         armorType = random.choice(armorList['armors'])
 
-        self.shipArmor = [armorType['typeName'], armorType['protection']]
+        self.Armor = [armorType['typeName'], armorType['protection']]
 
         armorFile.close()
 
     def getSpecial(self):
-        self.shipSpecial = []
+        self.Special = []
 
         specialFile = open("special.txt")
         specialList = specialFile.read().splitlines()
 
         for line in specialList:
             if random.randint(1, 100) > 50:
-                self.shipSpecial.append(line)
+                self.Special.append(line)
 
         specialFile.close()
 
@@ -56,10 +56,10 @@ class Ship:
         driveFile = open("drives.txt")
         driveList = driveFile.read().splitlines()
 
-        self.shipDrives = []
+        self.Drives = []
 
         for line in driveList:
-            self.shipDrives.append([line, random.choice(string.ascii_uppercase)])
+            self.Drives.append([line, random.choice(string.ascii_uppercase)])
 
         driveFile.close()
 
@@ -68,41 +68,41 @@ class Ship:
         electronicsList = json.load(electronicsFile)
         electronicsType = random.choice(electronicsList['electronics'])
 
-        self.shipElectronics = electronicsType['system']
+        self.Electronics = electronicsType['system']
 
-        self.shipComputer = random.randint(0,8)
+        self.Computer = random.randint(0,8)
 
         electronicsFile.close()
 
     def getRooms(self):
-        self.shipStateRooms = random.randint(int(self.shipSize)/100, int(self.shipSize)/50)
+        self.StateRooms = random.randint(int(self.Size)/100, int(self.Size)/50)
 
         if random.randint(0,100) > 50:  
-            self.shipLowPassageBerths = random.randint(0, int(self.shipSize)/10)
+            self.LowPassageBerths = random.randint(0, int(self.Size)/10)
         else:
-            self.shipLowPassageBerths = 0
+            self.LowPassageBerths = 0
 
     def getVehicles(self):
         vehicleFile = open("vehicles.txt")
         vehicleList = vehicleFile.read().splitlines()
 
-        self.shipVehicles = []
+        self.Vehicles = []
 
         for line in vehicleList:
-            if random.randint(0, int(self.shipSize)/10)  < random.randint(0, int(self.shipSize)): 
-                self.shipVehicles.append([line, random.randint(0, int(self.shipSize)/100)])
+            if random.randint(0, int(self.Size)/10)  < random.randint(0, int(self.Size)): 
+                self.Vehicles.append([line, random.randint(0, int(self.Size)/100)])
         
     def getWeapons(self):
-        self.shipWeapons = []
+        self.Weapons = []
 
-        if self.shipClass == "military":
+        if self.Class == "military":
             weaponFile = open("weapon.json")
             weaponList = json.load(weaponFile)
 
             mountList = weaponList['mounts']
             typeList = weaponList['types']
 
-            numWeapons = random.randint(int(self.shipSize)/1000, int(self.shipSize)/100)
+            numWeapons = random.randint(int(self.Size)/1000, int(self.Size)/100)
 
             for i in range(0, numWeapons):
                 mountType = random.choice(mountList)
@@ -111,7 +111,7 @@ class Ship:
                 for i in range(0, int(mountType['ports'])):
                     mountContents.append(random.choice(typeList))
 
-                self.shipWeapons.append(Weapon(mountType['mountName'], mountContents))
+                self.Weapons.append(Weapon(mountType['mountName'], mountContents))
 
 class Weapon:
     def __init__(self, mountType, mountContents= []):
