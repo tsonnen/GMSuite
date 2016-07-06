@@ -63,8 +63,8 @@ class charGenUI:
         classFile.close()
 
     def getRaces(self):
-        racesFile = open("races.txt")
-        races = racesFile.read().splitlines()
+        racesFile = open("firstnames.json")
+        races = json.load(racesFile)
         
         for i in races:
              self.raceChoices.append_text(i)
