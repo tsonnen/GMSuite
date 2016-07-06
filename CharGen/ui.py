@@ -32,6 +32,7 @@ class charGenUI:
         self.submitButton.connect("clicked", self.submit_OnClick)
 
         window.show_all()
+        window.connect("destroy", self.Destroy)
 
         statsFile.close()
 
@@ -108,5 +109,8 @@ class charGenUI:
         charSkills.set_size_request(-1, -1)
 
         popup.show_all()
+
+    def Destroy(self, obj):
+        gtk.main_quit()
 
 app = charGenUI()

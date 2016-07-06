@@ -24,6 +24,8 @@ class shipCreatorUI:
         self.submitButton.connect("clicked", self.submit_OnClick)
 
         window.show_all()
+        
+        window.connect("destroy", self.Destroy)
 
         gtk.main()
 
@@ -89,5 +91,8 @@ class shipCreatorUI:
 
 
         popup.show_all()
+
+    def Destroy(self, obj):
+        gtk.main_quit()
 
 app = shipCreatorUI()
