@@ -1,4 +1,4 @@
-''' Tim Sonnen   6/22/2016
+''' 7/7/2016
     Provides a Ui that allows the user to easily
     enter in the seed information to make a character
 '''
