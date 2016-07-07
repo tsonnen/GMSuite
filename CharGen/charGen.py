@@ -1,27 +1,31 @@
-''' Tim Sonnen  6/19/2016
+''' 7/7/2016
     v. .01
     Character Generator for a tabletop RPG
      
     Creates a charcter with the input of Class, Race, Setting, and System
 '''
-import time, sys, random, string, json
+import time
+import sys
+import random
+import string
+import json
 
-class Character:
+class character:
     def __init__(self, system, classChoice, race, statChoices = [] ):
         self.race = race
         self.classChoice = classChoice
-        self.getStats(system, statChoices)
-        self.name = self.getName(race)
-        self.skills = self.getSkills()
+        self.get_stats(system, statChoices)
+        self.name = self.get_name(race)
+        self.skills = self.get_skills()
         self.stringCharacter()
 
-    def getStats(self, system, statChoices = [] ):
+    def get_stats(self, system, statChoices = [] ):
         self.charStats = []
 
         for i in range(0,len(statChoices)):
-            self.charStats.append([statChoices[i], self.getStatVal(system)])
+            self.charStats.append([statChoices[i], self.get_statVal(system)])
 
-    def getStatVal(self, system):
+    def get_statVal(self, system):
         if (system == "Dice"):
             return random.choice(["d6", "d8", "d10", "d12"])
         elif (system == "4d6"):
@@ -35,11 +39,11 @@ class Character:
                  total += random.randrange(1,6)
             return total
 
-    def getName(self, race):
+    def get_name(self, race):
         names = json.load(open("firstnames.json"))
         return random.choice(names[race])
 
-    def getSkills(self):
+    def get_skills(self):
         skillVal = random.randrange(25, 40)
         skillList = open("skills.txt").read().splitlines()
         charSkills = []

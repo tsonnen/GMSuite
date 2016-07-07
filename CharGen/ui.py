@@ -9,7 +9,7 @@ from gi.repository import Gtk as gtk
 import json
 import charGen
 
-class charGenUI:
+class chargen_ui:
     def __init__(self):
         builder = gtk.Builder()
         builder.add_from_file("charGen.glade")
@@ -22,9 +22,9 @@ class charGenUI:
         self.submitButton = builder.get_object("submit")
 
 
-        self.getSystems()
-        self.getClasses()
-        self.getRaces()
+        self.systems()
+        self.classes()
+        self.races()
 
         statsFile = open("stats.txt")
 
@@ -38,21 +38,20 @@ class charGenUI:
 
         gtk.main()
 
-    def getSystems(self):
+    def systems(self):
         systemFile = open("systems.txt")
-        systems    = systemFile.read().splitlines()
+        systemsList = systemFile.read().splitlines()
 
-        for i in systems:
+        for i in systemsList:
             self.systemChoices.append_text(i)
 
         self.systemChoices.set_active(0)
 
         systemFile.close()
 
-    def getClasses(self):
+    def classes(self):
         classFile = open("classes.json")
-        classes = json.load(classFile)
-        classList = classes
+        classList = json.load(classFile)
 
         self.classChoices.remove_all()
         
@@ -63,11 +62,11 @@ class charGenUI:
 
         classFile.close()
 
-    def getRaces(self):
+    def races(self):
         racesFile = open("firstnames.json")
-        races = json.load(racesFile)
+        racesList = json.load(racesFile)
         
-        for i in races:
+        for i in racesList:
              self.raceChoices.append_text(i)
 
         self.raceChoices.set_active(0)
@@ -75,15 +74,15 @@ class charGenUI:
         racesFile.close()
 
     def submit_OnClick(self, button):
-        character = charGen.Character(self.systemChoices.get_active_text(), self.classChoices.get_active_text(), self.raceChoices.get_active_text(), self.stats)
+        character = charGen.character(self.systemChoices.get_active_text(), self.classChoices.get_active_text(), self.raceChoices.get_active_text(), self.stats)
 
-        self.PopUp(character)
+        self.popup(character)
 
-    def PopUp(self, character):
+    def popup(self, character):
         popUpBuilder = gtk.Builder()
         popUpBuilder.add_from_file("charGen.glade")
 
-        popup = popUpBuilder.get_object("CharDisplay")
+        popupWindow = popUpBuilder.get_object("CharDisplay")
 
         charName = popUpBuilder.get_object("nameLbl")
         charRaceClass = popUpBuilder.get_object("raceClassLbl") 
@@ -108,9 +107,9 @@ class charGenUI:
         charSkills.set_line_wrap(True)
         charSkills.set_size_request(-1, -1)
 
-        popup.show_all()
+        popupWindow.show_all()
 
     def Destroy(self, obj):
         gtk.main_quit()
 
-app = charGenUI()
+app = chargen_ui()

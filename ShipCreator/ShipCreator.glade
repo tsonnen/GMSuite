@@ -138,18 +138,6 @@
             <property name="top_attach">7</property>
           </packing>
         </child>
-        <child>
-          <object class="GtkButton" id="closeBtn">
-            <property name="label" translatable="yes">Close</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">8</property>
-          </packing>
-        </child>
       </object>
     </child>
   </object>

@@ -1,4 +1,4 @@
-''' 7/2/2016
+''' 7/7/2016
     v.01
     Starship Generator for a tabletop RPG
 
@@ -11,91 +11,91 @@ import random
 import string
 import json
 
-class Ship:
+class ship:
     def __init__(self, shipType):
-        self.Type = shipType
+        self.type = shipType
 
-        self.getShipInfo()
-        self.getArmor()
-        self.getSpecial()
-        self.getDrives()
-        self.getElectronics()
-        self.getRooms()
-        self.getVehicles()
-        self.getWeapons()
+        self.get_shipInfo()
+        self.get_armor()
+        self.get_special()
+        self.get_drives()
+        self.get_electronics()
+        self.get_rooms()
+        self.get_vehicles()
+        self.get_weapons()
 
-    def getShipInfo(self):
+    def get_shipInfo(self):
         infoFile = open("types.json")
         infoList = json.load(infoFile)
 
-        self.Size = infoList[self.Type]['size']
-        self.Class = infoList[self.Type]['class']
+        self.size = infoList[self.type]['size']
+        self.classType = infoList[self.type]['class']
 
-    def getArmor(self):
+    def get_armor(self):
         armorFile = open("armor.json")
         armorList = json.load(armorFile)
         armorType = random.choice(armorList['armors'])
 
-        self.Armor = [armorType['typeName'], armorType['protection']]
+        self.armor = [armorType['typeName'], armorType['protection']]
 
         armorFile.close()
 
-    def getSpecial(self):
-        self.Special = []
+    def get_special(self):
+        self.special = []
 
         specialFile = open("special.txt")
         specialList = specialFile.read().splitlines()
 
         for line in specialList:
             if random.randint(1, 100) > 50:
-                self.Special.append(line)
+                self.special.append(line)
 
         specialFile.close()
 
-    def getDrives(self):
+    def get_drives(self):
         driveFile = open("drives.txt")
         driveList = driveFile.read().splitlines()
 
-        self.Drives = []
+        self.drives = []
 
         for line in driveList:
-            self.Drives.append([line, random.choice(string.ascii_uppercase)])
+            self.drives.append([line, random.choice(string.ascii_uppercase)])
 
         driveFile.close()
 
-    def getElectronics(self):
+    def get_electronics(self):
         electronicsFile = open('electronics.json')
         electronicsList = json.load(electronicsFile)
         electronicsType = random.choice(electronicsList['electronics'])
 
-        self.Electronics = electronicsType['system']
+        self.electronics = electronicsType['system']
 
-        self.Computer = random.randint(0,8)
+        self.computer = random.randint(0,8)
 
         electronicsFile.close()
 
-    def getRooms(self):
-        self.StateRooms = random.randint(int(self.Size)/100, int(self.Size)/50)
+    def get_rooms(self):
+        self.stateRooms = random.randint(int(self.size)/100, int(self.size)/50)
 
         if random.randint(0,100) > 50:  
-            self.LowPassageBerths = random.randint(0, int(self.Size)/10)
+            self.lowPassageBerths = random.randint(0, int(self.size)/10)
         else:
-            self.LowPassageBerths = 0
+            self.lowPassageBerths = 0
 
-    def getVehicles(self):
+    def get_vehicles(self):
         vehicleFile = open("vehicles.txt")
         vehicleList = vehicleFile.read().splitlines()
 
-        self.Vehicles = []
+        self.vehicles = []
 
         for line in vehicleList:
-            if random.randint(0, int(self.Size)/10)  < random.randint(0, int(self.Size)): 
-                self.Vehicles.append([line, random.randint(0, int(self.Size)/100)])
+            if random.randint(0, int(self.size)/10)  < random.randint(0, int(self.size)): 
+                self.vehicles.append([line, random.randint(0, int(self.size)/100)])
         
-    def getWeapons(self):
-        self.Weapons = []
+    def get_weapons(self):
+        self.weapons = []
 
-        if self.Class == "military":
+        if self.classType == "military":
             weaponFile = open("weapon.json")
             weaponList = json.load(weaponFile)
 
@@ -111,9 +111,9 @@ class Ship:
                 for i in range(0, int(mountType['ports'])):
                     mountContents.append(random.choice(typeList))
 
-                self.Weapons.append(Weapon(mountType['mountName'], mountContents))
+                self.weapons.append(weapon(mountType['mountName'], mountContents))
 
-class Weapon:
+class weapon:
     def __init__(self, mountType, mountContents= []):
         self.mountType = mountType
         self.mountContents = mountContents

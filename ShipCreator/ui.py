@@ -1,4 +1,4 @@
-'''Tim Sonnen   6/20/2016
+'''7/7/2016
    A UI for creating a ship to be used in a Sci-Fi
    tabletop RPG.
 '''
@@ -9,7 +9,7 @@ from gi.repository import Gtk as gtk
 import json
 import shipCreator
 
-class shipCreatorUI:
+class shipcreator_ui:
     def __init__(self):
         builder = gtk.Builder()
         builder.add_from_file("ShipCreator.glade")
@@ -19,7 +19,7 @@ class shipCreatorUI:
         self.typeChoice = builder.get_object("typeChoice")
         self.submitButton = builder.get_object("submit")
 
-        self.getTypes()
+        self.get_types()
 
         self.submitButton.connect("clicked", self.submit_OnClick)
 
@@ -29,7 +29,7 @@ class shipCreatorUI:
 
         gtk.main()
 
-    def getTypes (self):
+    def get_types (self):
         typesFile = open("types.json")
         types = json.load(typesFile)
 
@@ -41,15 +41,15 @@ class shipCreatorUI:
         typesFile.close()
 
     def submit_OnClick(self, button):
-        ship = shipCreator.Ship(self.typeChoice.get_active_text())
+        ship = shipCreator.ship(self.typeChoice.get_active_text())
         
-        self.PopUp(ship)
+        self.popup(ship)
 
-    def PopUp(self, ship):
+    def popup(self, ship):
         popUpBuilder = gtk.Builder()
         popUpBuilder.add_from_file("ShipCreator.glade")
 
-        popup = popUpBuilder.get_object("ShipDisplay")
+        popupWindow = popUpBuilder.get_object("ShipDisplay")
 
         shipInfo = popUpBuilder.get_object("infoLbl")
         shipSpecial = popUpBuilder.get_object("specialLbl")
@@ -65,34 +65,34 @@ class shipCreatorUI:
         vehicleStr = ""
         weaponStr = ""
 
-        for special in ship.Special:
+        for special in ship.special:
             specialStr += special + "\n"
         
-        for drive in ship.Drives:
+        for drive in ship.drives:
             driveStr += drive[0] + ":" + drive[1] + "\n" 
 
-        for vehicle in ship.Vehicles:
+        for vehicle in ship.vehicles:
             vehicleStr +=  str(vehicle[1]) + " "  + vehicle[0] + "\n"
 
-        for weapon in ship.Weapons:
+        for weapon in ship.weapons:
             weaponStr += weapon.mountType + "\n"
 
             for item in weapon.mountContents:
                 weaponStr += "\t" + item + "\n"
 
-        shipInfo.set_text(ship.Type + " " + ship.Size + " tons")
-        shipArmor.set_text(ship.Armor[0] + " : " + str(ship.Armor[1]) + " protection")
+        shipInfo.set_text(ship.type + " " + ship.size + " tons")
+        shipArmor.set_text(ship.armor[0] + " : " + str(ship.armor[1]) + " protection")
         shipSpecial.set_text(specialStr)
         shipDrives.set_text(driveStr)
-        shipRooms.set_text(str(ship.StateRooms) + " State rooms\n"  + str(ship.LowPassageBerths) + " Low passage berths")
-        shipElectronics.set_text("Computer: " + str(ship.Computer) + "\n" + ship.Electronics + "Level electronics" )
+        shipRooms.set_text(str(ship.stateRooms) + " State rooms\n"  + str(ship.lowPassageBerths) + " Low passage berths")
+        shipElectronics.set_text("Computer: " + str(ship.computer) + "\n" + ship.electronics + "Level electronics" )
         shipVehicles.set_text(vehicleStr)
         shipWeapons.set_text(weaponStr)
 
 
-        popup.show_all()
+        popupWindow.show_all()
 
     def Destroy(self, obj):
         gtk.main_quit()
 
-app = shipCreatorUI()
+app = shipcreator_ui()
