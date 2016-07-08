@@ -1,0 +1,32 @@
+{
+    "government":[
+        "None",
+        "Company/corporation",
+        "Participating democracy",
+        "Self-perpetuating oligarchy",
+        "Representative democracy",
+        "Feudal technocracy",
+        "Captive government",
+        "Balkanisation",
+        "Civil service bureaucracy",
+        "Impersonal Bureaucracy",
+        "Charismatic dictator",
+        "Non-charismatic leader",
+        "Charismatic oligarchy",
+        "Religious dictatorship"
+    ],
+    "factionStr":[
+        "Obscure group – few have heard of them, no popular support",
+        "Fringe group – few supporters",
+        "Minor group – some supporters",
+        "Notable group – signifi cant support, well known",
+        "Significant – nearly as powerful as thegovernment",
+        "Overwhelming popular support – more powerful than the government"
+    ],
+    "lawLevel":[
+        { "weapons":"none", "drugs":"none", "information":"none", 
+          "technology":"none", "travellers":"none", "psionics":"none"},
+        { "weapons":"all", "drugs":"all", "information":"all", 
+          "technology":"all", "travellers":"all", "psionics":"all"}
+    ]
+}

@@ -45,7 +45,8 @@ class character:
 
     def get_skills(self):
         skillVal = random.randrange(25, 40)
-        skillList = open("skills.txt").read().splitlines()
+        skillFile = open("skills.txt")
+        skillList = skillFile.read().splitlines()
         charSkills = []
 
         for i in range(0, skillVal):

@@ -8,6 +8,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk as gtk
 import json
+import worldGen
 
 class worldgen_ui:
     def __init__(self):
@@ -27,7 +28,7 @@ class worldgen_ui:
         gtk.main()
 
     def submit_OnClick(self, button):
-        print("hello\n")
+        world = worldGen.world()
 
     def Destroy(self, obj):
         gtk.main_quit()
