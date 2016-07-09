@@ -36,7 +36,8 @@ class worldgen_ui:
 
     def popup(self, world):
         popUpBuilder = gtk.Builder()
-        popUpBuilder.add_from_file("WorldGen.glade")
+        popUpBuilder.add_from_file(os.path.dirname(os.path.realpath(__file__))
+                                        + "/WorldGen.glade")
 
         popupWindow = popUpBuilder.get_object("world_display")
 
