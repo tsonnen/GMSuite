@@ -50,17 +50,23 @@ class character:
         skillFile = open(os.path.dirname(os.path.realpath(__file__)) 
                         + "/skills.txt")
         skillList = skillFile.read().splitlines()
+
         charSkills = []
 
+        baseFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + "/classes.json")
+        baseList = json.load(baseFile)
+        baseSkills = baseList[self.classChoice]
+
+        for x in baseSkills:
+            charSkills.append([x, 0])
+
         for i in range(0, skillVal):
-            new = []
             skill = random.choice(skillList)
             if(skill in charSkills):
                 charSkills[skill][0] += 1;
             else:
-                new.append(skill)
-                new.append(0)
-                charSkills.append(new);
+                charSkills.append([skill, 0]);
         return charSkills
 
     def stringCharacter(self):
