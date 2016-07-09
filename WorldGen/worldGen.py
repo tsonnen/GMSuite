@@ -1,4 +1,4 @@
-''' 7/7/2016
+''' 7/8/2016
 
     Generates the world. Currently does not 
     take any input as none is really needed
@@ -9,6 +9,7 @@ import sys
 import random
 import string
 import json
+import os
 
 class world:
     def __init__(self):
@@ -18,7 +19,8 @@ class world:
 
     # Get the geographical features of the world
     def get_geo(self):
-        geoFile = open("geography.json")
+        geoFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                        + "/geography.json")
         geoList = json.load(geoFile)
         
         self.size = random.choice(geoList['size'])
@@ -29,7 +31,8 @@ class world:
         geoFile.close()
 
     def get_government(self):
-        governmentFile = open("government.json")
+        governmentFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                            + "/government.json")
         governmentList = json.load(governmentFile)
 
         self.governmentType = random.choice(governmentList['government'])

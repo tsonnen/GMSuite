@@ -1,4 +1,4 @@
-''' 7/7/2016
+''' 7/8/2016
     v.01
     Starship Generator for a tabletop RPG
 
@@ -10,6 +10,7 @@ import sys
 import random
 import string
 import json
+import os
 
 class ship:
     def __init__(self, shipType):
@@ -25,14 +26,16 @@ class ship:
         self.get_weapons()
 
     def get_shipInfo(self):
-        infoFile = open("types.json")
+        infoFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                        + "/types.json")
         infoList = json.load(infoFile)
 
         self.size = infoList[self.type]['size']
         self.classType = infoList[self.type]['class']
 
     def get_armor(self):
-        armorFile = open("armor.json")
+        armorFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                         + "/armor.json")
         armorList = json.load(armorFile)
         armorType = random.choice(armorList['armors'])
 
@@ -43,7 +46,8 @@ class ship:
     def get_special(self):
         self.special = []
 
-        specialFile = open("special.txt")
+        specialFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                           + "/special.txt")
         specialList = specialFile.read().splitlines()
 
         for line in specialList:
@@ -53,7 +57,8 @@ class ship:
         specialFile.close()
 
     def get_drives(self):
-        driveFile = open("drives.txt")
+        driveFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                         + "/drives.txt")
         driveList = driveFile.read().splitlines()
 
         self.drives = []
@@ -64,7 +69,8 @@ class ship:
         driveFile.close()
 
     def get_electronics(self):
-        electronicsFile = open('electronics.json')
+        electronicsFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                                + "/electronics.json")
         electronicsList = json.load(electronicsFile)
         electronicsType = random.choice(electronicsList['electronics'])
 
@@ -83,7 +89,8 @@ class ship:
             self.lowPassageBerths = 0
 
     def get_vehicles(self):
-        vehicleFile = open("vehicles.txt")
+        vehicleFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                            + "/vehicles.txt")
         vehicleList = vehicleFile.read().splitlines()
 
         self.vehicles = []
@@ -96,7 +103,8 @@ class ship:
         self.weapons = []
 
         if self.classType == "military":
-            weaponFile = open("weapon.json")
+            weaponFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                                + "/weapon.json")
             weaponList = json.load(weaponFile)
 
             mountList = weaponList['mounts']

@@ -1,4 +1,4 @@
-'''7/7/2016
+'''7/8/2016
    A UI for creating a ship to be used in a Sci-Fi
    tabletop RPG.
 '''
@@ -8,11 +8,13 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk as gtk
 import json
 import shipCreator
+import os
 
 class shipcreator_ui:
     def __init__(self):
         builder = gtk.Builder()
-        builder.add_from_file("ShipCreator.glade")
+        builder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
+                                + "/ShipCreator.glade")
 
         window = builder.get_object("MainWindow")
 
@@ -30,7 +32,8 @@ class shipcreator_ui:
         gtk.main()
 
     def get_types (self):
-        typesFile = open("types.json")
+        typesFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                        + "/types.json")
         types = json.load(typesFile)
 
         for i in types:
@@ -47,7 +50,8 @@ class shipcreator_ui:
 
     def popup(self, ship):
         popUpBuilder = gtk.Builder()
-        popUpBuilder.add_from_file("ShipCreator.glade")
+        popUpBuilder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
+                                    + "/ShipCreator.glade")
 
         popupWindow = popUpBuilder.get_object("ShipDisplay")
 
@@ -94,5 +98,3 @@ class shipcreator_ui:
 
     def Destroy(self, obj):
         gtk.main_quit()
-
-app = shipcreator_ui()

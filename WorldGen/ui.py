@@ -1,4 +1,4 @@
-''' 7/6/2016
+''' 7/8/2016
 
     V. 0.9
     Shows the UI for the world generation
@@ -9,11 +9,13 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk as gtk
 import json
 import worldGen
+import os
 
 class worldgen_ui:
     def __init__(self):
         builder = gtk.Builder()
-        builder.add_from_file("WorldGen.glade")
+        builder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
+                                + "/WorldGen.glade")
 
         window = builder.get_object("mainwindow")
 
@@ -32,5 +34,3 @@ class worldgen_ui:
 
     def Destroy(self, obj):
         gtk.main_quit()
-
-app = worldgen_ui()
