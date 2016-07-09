@@ -8,14 +8,14 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk as gtk
 import json
-import worldGen
+from . import worldGen
 import os
 
 class worldgen_ui:
     def __init__(self):
         builder = gtk.Builder()
         builder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
-                                + "/WorldGen.glade")
+                                + os.sep + "WorldGen.glade")
 
         window = builder.get_object("mainwindow")
 
@@ -37,7 +37,7 @@ class worldgen_ui:
     def popup(self, world):
         popUpBuilder = gtk.Builder()
         popUpBuilder.add_from_file(os.path.dirname(os.path.realpath(__file__))
-                                        + "/WorldGen.glade")
+                                        + os.sep + "WorldGen.glade")
 
         popupWindow = popUpBuilder.get_object("world_display")
 

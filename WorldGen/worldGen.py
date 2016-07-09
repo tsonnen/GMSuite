@@ -20,7 +20,7 @@ class world:
     # Get the geographical features of the world
     def get_geo(self):
         geoFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/geography.json")
+                        + os.sep + "geography.json")
         geoList = json.load(geoFile)
         
         self.size = random.choice(geoList['size'])
@@ -32,7 +32,7 @@ class world:
 
     def get_government(self):
         governmentFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                            + "/government.json")
+                            + os.sep + "government.json")
         governmentList = json.load(governmentFile)
 
         self.governmentType = random.choice(governmentList['government'])

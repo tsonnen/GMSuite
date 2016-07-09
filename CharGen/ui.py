@@ -7,14 +7,14 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk as gtk
 import json
-import charGen
+from . import charGen
 import os
 
 class chargen_ui:
     def __init__(self):
         builder = gtk.Builder()
         builder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
-                                + "/charGen.glade")
+                                + os.sep + "charGen.glade")
 
         window = builder.get_object("MainWindow")
 
@@ -29,7 +29,7 @@ class chargen_ui:
         self.races()
 
         statsFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/stats.txt")
+                        + os.sep + "stats.txt")
 
         self.stats = statsFile.read().splitlines()
         self.submitButton.connect("clicked", self.submit_OnClick)
@@ -43,7 +43,7 @@ class chargen_ui:
 
     def systems(self):
         systemFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/systems.txt")
+                        + os.sep + "systems.txt")
         systemsList = systemFile.read().splitlines()
 
         for i in systemsList:
@@ -55,7 +55,7 @@ class chargen_ui:
 
     def classes(self):
         classFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/classes.json")
+                        + os.sep + "classes.json")
         classList = json.load(classFile)
 
         self.classChoices.remove_all()
@@ -69,7 +69,7 @@ class chargen_ui:
 
     def races(self):
         racesFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/firstnames.json")
+                        + os.sep + "firstnames.json")
         racesList = json.load(racesFile)
         
         for i in racesList:
@@ -87,7 +87,7 @@ class chargen_ui:
     def popup(self, character):
         popUpBuilder = gtk.Builder()
         popUpBuilder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
-                                    + "/charGen.glade")
+                                    + os.sep + "charGen.glade")
 
         popupWindow = popUpBuilder.get_object("CharDisplay")
 
@@ -97,7 +97,7 @@ class chargen_ui:
         charSkills = popUpBuilder.get_object("skillsLbl")
 
         charName.set_text(character.name)
-        charRaceClass.set_text(character.race + "/" + character.classChoice)
+        charRaceClass.set_text(character.race + os.sep + "" + character.classChoice)
 
         statStr = ""
         skillStr = ""

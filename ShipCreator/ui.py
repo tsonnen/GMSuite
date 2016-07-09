@@ -7,14 +7,14 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk as gtk
 import json
-import shipCreator
+from . import shipCreator
 import os
 
 class shipcreator_ui:
     def __init__(self):
         builder = gtk.Builder()
         builder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
-                                + "/ShipCreator.glade")
+                                + os.sep + "ShipCreator.glade")
 
         window = builder.get_object("MainWindow")
 
@@ -33,7 +33,7 @@ class shipcreator_ui:
 
     def get_types (self):
         typesFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/types.json")
+                        + os.sep + "types.json")
         types = json.load(typesFile)
 
         for i in types:
@@ -51,7 +51,7 @@ class shipcreator_ui:
     def popup(self, ship):
         popUpBuilder = gtk.Builder()
         popUpBuilder.add_from_file(os.path.dirname(os.path.realpath(__file__)) 
-                                    + "/ShipCreator.glade")
+                                    + os.sep + "ShipCreator.glade")
 
         popupWindow = popUpBuilder.get_object("ShipDisplay")
 

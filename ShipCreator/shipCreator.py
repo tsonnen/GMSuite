@@ -27,7 +27,7 @@ class ship:
 
     def get_shipInfo(self):
         infoFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/types.json")
+                        + os.sep + "types.json")
         infoList = json.load(infoFile)
 
         self.size = infoList[self.type]['size']
@@ -35,7 +35,7 @@ class ship:
 
     def get_armor(self):
         armorFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                         + "/armor.json")
+                         + os.sep + "armor.json")
         armorList = json.load(armorFile)
         armorType = random.choice(armorList['armors'])
 
@@ -47,7 +47,7 @@ class ship:
         self.special = []
 
         specialFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                           + "/special.txt")
+                           + os.sep + "special.txt")
         specialList = specialFile.read().splitlines()
 
         for line in specialList:
@@ -58,7 +58,7 @@ class ship:
 
     def get_drives(self):
         driveFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                         + "/drives.txt")
+                         + os.sep + "drives.txt")
         driveList = driveFile.read().splitlines()
 
         self.drives = []
@@ -70,7 +70,7 @@ class ship:
 
     def get_electronics(self):
         electronicsFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                                + "/electronics.json")
+                                + os.sep + "electronics.json")
         electronicsList = json.load(electronicsFile)
         electronicsType = random.choice(electronicsList['electronics'])
 
@@ -90,7 +90,7 @@ class ship:
 
     def get_vehicles(self):
         vehicleFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                            + "/vehicles.txt")
+                            + os.sep + "vehicles.txt")
         vehicleList = vehicleFile.read().splitlines()
 
         self.vehicles = []
@@ -104,7 +104,7 @@ class ship:
 
         if self.classType == "military":
             weaponFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                                + "/weapon.json")
+                                + os.sep + "weapon.json")
             weaponList = json.load(weaponFile)
 
             mountList = weaponList['mounts']

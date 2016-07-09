@@ -42,19 +42,19 @@ class character:
 
     def get_name(self, race):
         names = json.load(open(os.path.dirname(os.path.realpath(__file__)) 
-                                + "/firstnames.json"))
+                                + os.sep + "firstnames.json"))
         return random.choice(names[race])
 
     def get_skills(self):
         skillVal = random.randrange(25, 40)
         skillFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + "/skills.txt")
+                        + os.sep + "skills.txt")
         skillList = skillFile.read().splitlines()
 
         charSkills = []
 
         baseFile = open(os.path.dirname(os.path.realpath(__file__))
-                        + "/classes.json")
+                        + os.sep + "classes.json")
         baseList = json.load(baseFile)
         baseSkills = baseList[self.classChoice]
 
