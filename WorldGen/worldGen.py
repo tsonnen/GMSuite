@@ -45,6 +45,3 @@ class world:
                                   random.choice(governmentList['government'])])
 
         self.lawLevel = random.choice(governmentList['lawLevel'])
-
-        print(self.factions)
-        print(self.lawLevel['drugs'])
