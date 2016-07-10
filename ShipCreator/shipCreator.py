@@ -1,4 +1,4 @@
-''' 7/8/2016
+''' 7/9/2016
     v.01
     Starship Generator for a tabletop RPG
 
@@ -26,59 +26,75 @@ class ship:
         self.get_weapons()
 
     def get_shipInfo(self):
-        infoFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + os.sep + "types.json")
-        infoList = json.load(infoFile)
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "shipData.json")
 
-        self.size = infoList[self.type]['size']
-        self.classType = infoList[self.type]['class']
+        dataList = json.load(dataFile)
+        infoList = dataList['types']
+        infoDict = dict()
+
+        # Convert the list of values to a dict so str keys can be used
+        for i in infoList:
+            infoDict.update(dict(i))
+
+        self.size = infoDict[self.type]['size']
+        self.classType = infoDict[self.type]['class']
+
+        dataFile.close()
 
     def get_armor(self):
-        armorFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                         + os.sep + "armor.json")
-        armorList = json.load(armorFile)
-        armorType = random.choice(armorList['armors'])
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "shipData.json")
+        dataList = json.load(dataFile)
+        armorList = dataList['armor']
+
+        # Get a random armor for the ship
+        armorType = random.choice(armorList)
 
         self.armor = [armorType['typeName'], armorType['protection']]
 
-        armorFile.close()
+        dataFile.close()
 
     def get_special(self):
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "shipData.json")
+        dataList = json.load(dataFile)
+        specialList = dataList['special']
+
         self.special = []
 
-        specialFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                           + os.sep + "special.txt")
-        specialList = specialFile.read().splitlines()
-
+        # There is a 50% chance of each type of special item
         for line in specialList:
             if random.randint(1, 100) > 50:
                 self.special.append(line)
 
-        specialFile.close()
+        dataFile.close()
 
     def get_drives(self):
-        driveFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                         + os.sep + "drives.txt")
-        driveList = driveFile.read().splitlines()
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "shipData.json")
+        dataList = json.load(dataFile)
+        driveList = dataList['drives']
 
-        self.drives = []
+        self.drives = dict()
 
+        # Get random values for the drives of the ship
         for line in driveList:
-            self.drives.append([line, random.choice(string.ascii_uppercase)])
+            self.drives[line] = random.choice(string.ascii_uppercase)
 
-        driveFile.close()
+        dataFile.close()
 
     def get_electronics(self):
-        electronicsFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                                + os.sep + "electronics.json")
-        electronicsList = json.load(electronicsFile)
-        electronicsType = random.choice(electronicsList['electronics'])
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "shipData.json")
+        dataList = json.load(dataFile)
+        electronicsType = random.choice(dataList['electronics'])
 
         self.electronics = electronicsType['system']
 
         self.computer = random.randint(0,8)
 
-        electronicsFile.close()
+        dataFile.close()
 
     def get_rooms(self):
         self.stateRooms = random.randint(int(self.size)/100, int(self.size)/50)
@@ -89,28 +105,38 @@ class ship:
             self.lowPassageBerths = 0
 
     def get_vehicles(self):
-        vehicleFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                            + os.sep + "vehicles.txt")
-        vehicleList = vehicleFile.read().splitlines()
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "shipData.json")
+        dataList = json.load(dataFile)
+        vehicleList = dataList['vehicles']
 
-        self.vehicles = []
+        self.vehicles = dict()
 
         for line in vehicleList:
             if random.randint(0, int(self.size)/10)  < random.randint(0, int(self.size)): 
-                self.vehicles.append([line, random.randint(0, int(self.size)/100)])
+                self.vehicles[line] =  random.randint(0, int(self.size)/100)
+
+        dataFile.close()
         
     def get_weapons(self):
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "shipData.json")
+        dataList = json.load(dataFile)
+
         self.weapons = []
 
         if self.classType == "military":
-            weaponFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                                + os.sep + "weapon.json")
-            weaponList = json.load(weaponFile)
+            weaponList = dataList['weapons']
+            weaponDict = dict()
 
-            mountList = weaponList['mounts']
-            typeList = weaponList['types']
+            # Convert to dict to use str keys
+            for i in weaponList:
+                weaponDict.update(dict(i))
 
-            numWeapons = random.randint(int(self.Size)/1000, int(self.Size)/100)
+            mountList = weaponDict['mounts']
+            typeList = weaponDict['types']
+
+            numWeapons = random.randint(int(self.size)/1000, int(self.size)/100)
 
             for i in range(0, numWeapons):
                 mountType = random.choice(mountList)
@@ -120,6 +146,8 @@ class ship:
                     mountContents.append(random.choice(typeList))
 
                 self.weapons.append(weapon(mountType['mountName'], mountContents))
+
+        dataFile.close()
 
 class weapon:
     def __init__(self, mountType, mountContents= []):

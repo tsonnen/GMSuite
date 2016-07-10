@@ -1,4 +1,54 @@
 {
+    "size": [
+        "800",
+        "1,600",
+        "3,200",
+        "4,800",
+        "6,400",
+        "8,000",
+        "9,600",
+        "11,200",
+        "12,800",
+        "14,400",
+        "16,000"
+    ],
+    "atmosphere":[
+        "None",
+        "Trace",
+        "Very Thin, Tainted",
+        "Very Thin",
+        "Thin, Tainted",
+        "Thin",
+        "Standard",
+        "Standard, Tainted",
+        "Dense",
+        "Dense, Tainted",
+        "Exotic",
+        "Corrosive",
+        "Insidious",
+        "Dense, High",
+        "Thin, Low",
+        "Unusual"
+    ],
+    "temperature":[
+        "Frozen",
+        "Cold",
+        "Temperate",
+        "Hot",
+        "Roasting"
+    ],
+    "hydrographics":[
+        "Desert world",
+        "Dry world",
+        "A few small seas",
+        "Small seas and oceans",
+        "Wet world",
+        "Large oceans",
+        "Earth-like world",
+        "Water world",
+        "Only a few small islands and archipelagos",
+        "Almost entirely water"
+    ],
     "government":[
         "None",
         "Company/corporation",

@@ -1,7 +1,0 @@
-{
-  "armors":[
-    { "typeName":"TitaniumSteel", "protection": 2 },
-    { "typeName":"Crystaliron", "protection": 4 },
-    { "typeName":"BondedSuperdense", "protection": 6 }
-  ]
-}

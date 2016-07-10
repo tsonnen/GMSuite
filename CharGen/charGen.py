@@ -1,4 +1,4 @@
-''' 7/7/2016
+''' 7/9/2016
     v. .01
     Character Generator for a tabletop RPG
      
@@ -12,19 +12,24 @@ import json
 import os
 
 class character:
-    def __init__(self, system, classChoice, race, statChoices = [] ):
+    def __init__(self, system, classChoice, race):
         self.race = race
         self.classChoice = classChoice
-        self.get_stats(system, statChoices)
-        self.name = self.get_name(race)
-        self.skills = self.get_skills()
-        self.stringCharacter()
 
-    def get_stats(self, system, statChoices = [] ):
-        self.charStats = []
+        self.get_stats(system)
+        self.get_name(race)
+        self.get_skills()
+
+    def get_stats(self, system):
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "charData.json")
+        dataList = json.load(dataFile)
+        statChoices = dataList['stats']
+
+        self.charStats = {}
 
         for i in range(0,len(statChoices)):
-            self.charStats.append([statChoices[i], self.get_statVal(system)])
+            self.charStats[statChoices[i]] = self.get_statVal(system)
 
     def get_statVal(self, system):
         if (system == "Dice"):
@@ -41,38 +46,44 @@ class character:
             return total
 
     def get_name(self, race):
-        names = json.load(open(os.path.dirname(os.path.realpath(__file__)) 
-                                + os.sep + "firstnames.json"))
-        return random.choice(names[race])
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "charData.json")
+        dataList = json.load(dataFile)
+        nameList = dataList['names']
+        nameDict = dict()
+
+        for i in nameList:
+            nameDict.update(dict(i))
+
+        
+        self.name = random.choice(nameDict[race])
 
     def get_skills(self):
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "charData.json")
+        dataList = json.load(dataFile)
+        skillList = dataList['skills']
+
         skillVal = random.randrange(25, 40)
-        skillFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + os.sep + "skills.txt")
-        skillList = skillFile.read().splitlines()
 
-        charSkills = []
+        charSkills = dict()
 
-        baseFile = open(os.path.dirname(os.path.realpath(__file__))
-                        + os.sep + "classes.json")
-        baseList = json.load(baseFile)
-        baseSkills = baseList[self.classChoice]
+        baseList = dataList['classes']
+        baseDict = dict()
+
+        for y in baseList:
+            baseDict.update(dict(y))
+
+        baseSkills = baseDict[self.classChoice]
 
         for x in baseSkills:
-            charSkills.append([x, 0])
+            charSkills[x] = 0
 
         for i in range(0, skillVal):
             skill = random.choice(skillList)
-            if(skill in charSkills):
-                charSkills[skill][0] += 1;
+            if skill in charSkills.keys():
+                charSkills[skill] += 1;
             else:
-                charSkills.append([skill, 0]);
-        return charSkills
+                charSkills[skill] = 0;
 
-    def stringCharacter(self):
-        charstr = self.name + "\t" + self.race + " " + self.classChoice + "\n"
-        for i in range(0, len(self.charStats)):
-            charstr += self.charStats[i][0] + ": " + str(self.charStats[i][1]) + "\n"
-        for x in range(0, len(self.skills)):
-            charstr += self.skills[x][0] + "  " + str(self.skills[x][1]) + ", "
-        return charstr
+        self.skills = charSkills

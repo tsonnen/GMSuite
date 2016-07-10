@@ -31,17 +31,19 @@ class shipcreator_ui:
 
         gtk.main()
 
+    # Load the types of ships from the json file
     def get_types (self):
-        typesFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + os.sep + "types.json")
-        types = json.load(typesFile)
+        dataFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                        + os.sep + "shipData.json")
+        dataList = json.load(dataFile)
+        types = dataList['types']
 
         for i in types:
-            self.typeChoice.append_text(i)
+            self.typeChoice.append_text(i.keys()[0])
 
         self.typeChoice.set_active(0)
 
-        typesFile.close()
+        dataFile.close()
 
     def submit_OnClick(self, button):
         ship = shipCreator.ship(self.typeChoice.get_active_text())
@@ -72,11 +74,11 @@ class shipcreator_ui:
         for special in ship.special:
             specialStr += special + "\n"
         
-        for drive in ship.drives:
-            driveStr += drive[0] + ":" + drive[1] + "\n" 
+        for drive in ship.drives.keys():
+            driveStr += drive + ":" + ship.drives[drive] + "\n" 
 
-        for vehicle in ship.vehicles:
-            vehicleStr +=  str(vehicle[1]) + " "  + vehicle[0] + "\n"
+        for vehicle in ship.vehicles.keys():
+            vehicleStr +=  str(ship.vehicles[vehicle]) + " "  + vehicle + "\n"
 
         for weapon in ship.weapons:
             weaponStr += weapon.mountType + "\n"

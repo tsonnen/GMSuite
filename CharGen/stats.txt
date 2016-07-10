@@ -1,7 +1,0 @@
-Strength
-Dexterity
-Intelligence
-Constitution
-Wisdom
-Charisma
-Psionics

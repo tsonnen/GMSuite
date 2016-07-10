@@ -1,0 +1,52 @@
+{
+  "armor":[
+    { "typeName":"TitaniumSteel", "protection": 2 },
+    { "typeName":"Crystaliron", "protection": 4 },
+    { "typeName":"BondedSuperdense", "protection": 6 }
+  ],
+  "drives":[
+    "Jump",
+    "Manoeuvre",
+    "Power"
+  ],
+  "electronics":[
+    {"system":"Standard", "techLevel":"8", "diceModifier":"-4", "contents":["Radar", "Lidar"]},
+    {"system":"Basic Civilian", "techLevel":"9", "diceModifier":"-2", "contents":["Radar", "Lidar"]},
+    {"system":"Basic Military", "techLevel":"10", "diceModifier":"+0", "contents":["Radar", "Lidar", "Jammers"]},
+    {"system":"Advanced", "techLevel":"11", "diceModifier":"+1", "contents":["Radar", "Lidar", "DEsitometer", "Jammers"]},
+    {"system":"Very Advanced", "techLevel":"12", "diceModifier":"+2", "contents":["Radar", "Lidar","Densitometer","Jammers", "Neural Activity Sensor"]}
+  ],
+  "special":[
+    "Reflec",
+    "Self-Sealling",
+    "Stealth"
+  ],
+  "types":[
+    {"Scout": {
+      "class": "military",
+      "size": "1000"
+    }},
+    {"Merchant": {
+      "class": "civilian",
+      "size": "20000"
+    }}
+  ],
+
+  "vehicles":[
+    "Repair Drones",
+    "Mining Droves",
+    "ATV",
+    "Escape Pods"
+  ],
+
+  "weapons":[
+    {"mounts":[
+      {"mountName":"singleTurret", "ports":"1"},
+      {"mountName":"doubleTurret", "ports":"2"},
+      {"mountName":"tripleTurret", "ports":"3"},
+      {"mountName":"bay", "ports":"1"}
+    ]},
+
+    {"types": ["Pulse Laser", "Missle Rack", "Beam" ]}
+  ]
+}

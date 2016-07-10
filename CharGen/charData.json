@@ -1,0 +1,140 @@
+{
+ "classes":[
+   {"Rogue":[
+      "Persuade",
+      "Decpetion"
+   ]},
+   {"Fighter": [
+      "Weapons", 
+      "Fighting"
+   ]},
+   {"Monk": [
+      "Religion",
+      "History"
+   ]},
+   {"Random": [
+      
+   ]}
+],
+"skills":[
+  "balance",
+  "befriend",
+  "break",
+  "build",
+  "charm",
+  "climb",
+  "conceal",
+  "conclude",
+  "craft",
+  "crawl",
+  "deceive",
+  "dive",
+  "drag",
+  "drive",
+  "ensnare",
+  "escape",
+  "fix",
+  "flip",
+  "grow",
+  "hack",
+  "investigate",
+  "jump",
+  "know",
+  "lasso",
+  "lie",
+  "lift",
+  "perform",
+  "pull",
+  "push",
+  "read",
+  "repel (down a rope)",
+  "restrain",
+  "ride",
+  "run",
+  "search",
+  "sing",
+  "slide",
+  "sneak",
+  "steal",
+  "swim",
+  "swing",
+  "tame",
+  "track",
+  "tumble",
+  "unlock",
+  "wall run",
+  "write"
+],
+"systems":[
+  "Dice",
+  "2d6",
+  "4d6"
+],
+"stats":[
+  "Strength",
+  "Dexterity",
+  "Intelligence",
+  "Constitution",
+  "Wisdom",
+  "Charisma",
+  "Psionics"
+],
+"names":[
+  {"Human": [
+    "George",
+    "John",
+    "Nancy",
+    "Ted",
+    "Toni",
+    "Stacy"
+  ]},
+  {"Orc": [
+    "Xuthakug",
+    "Eggugat",
+    "Shulong",
+    "Nildud",
+    "Oggugat",
+    "Kurz",
+    "Hanz",
+    "Nogugh",
+    "Knurigig",
+    "Ghorbash"
+  ]},
+  {"Elf": [
+    "Ievos Phigella",
+    "Riluaneth Herwarin",
+    "Kesefehon Aebalar",
+    "Taegen Keaharice",
+    "Alre Erneiros",
+    "Castien Keaberos",
+    "Nlossae Ianzana",
+    "Myrin Holafiel",
+    "Hagmer Reyxisys",
+    "Illithor Inaynore"
+  ]},
+  {"Gnome": [
+    "Horpos",
+    "Yeybar",
+    "Calfan",
+    "Jorgim",
+    "Ronvyn",
+    "Umrick",
+    "Erjin",
+    "Vortor",
+    "Erxif",
+    "Quopos"
+  ]},
+  {"Aslan": [
+    "hleaoreas",
+    "easeih",
+    "sileiloakh",
+    "koitreei",
+    "aiailea",
+    "iyeyel",
+    "aukhauaol",
+    "fiyawoi",
+    "kteaateis",
+    "aoewi"
+  ]}
+]
+}

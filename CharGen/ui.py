@@ -1,4 +1,4 @@
-''' 7/7/2016
+''' 7/9/2016
     Provides a Ui that allows the user to easily
     enter in the seed information to make a character
 '''
@@ -28,59 +28,54 @@ class chargen_ui:
         self.classes()
         self.races()
 
-        statsFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + os.sep + "stats.txt")
-
-        self.stats = statsFile.read().splitlines()
         self.submitButton.connect("clicked", self.submit_OnClick)
 
         window.show_all()
         window.connect("destroy", self.Destroy)
 
-        statsFile.close()
-
         gtk.main()
 
     def systems(self):
-        systemFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + os.sep + "systems.txt")
-        systemsList = systemFile.read().splitlines()
+        dataFile = open(os.path.dirname(os.path.realpath(__file__)) 
+                        + os.sep + "charData.json")
+        dataList = json.load(dataFile)
+        systemsList = dataList['systems']
 
         for i in systemsList:
             self.systemChoices.append_text(i)
 
         self.systemChoices.set_active(0)
 
-        systemFile.close()
+        dataFile.close()
 
     def classes(self):
-        classFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + os.sep + "classes.json")
-        classList = json.load(classFile)
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "charData.json")
+        dataList = json.load(dataFile)
+        classList = dataList['classes']
 
-        self.classChoices.remove_all()
-        
         for i in classList:
-            self.classChoices.append_text(i)
+            self.classChoices.append_text(i.keys()[0])
 
         self.classChoices.set_active(0)
 
-        classFile.close()
+        dataFile.close()
 
     def races(self):
-        racesFile = open(os.path.dirname(os.path.realpath(__file__)) 
-                        + os.sep + "firstnames.json")
-        racesList = json.load(racesFile)
+        dataFile = open(os.path.dirname(os.path.realpath(__file__))
+                        + os.sep + "charData.json")
+        dataList = json.load(dataFile)
+        racesList = dataList['names']
         
         for i in racesList:
-             self.raceChoices.append_text(i)
+             self.raceChoices.append_text(i.keys()[0])
 
         self.raceChoices.set_active(0)
 
-        racesFile.close()
+        dataFile.close()
 
     def submit_OnClick(self, button):
-        character = charGen.character(self.systemChoices.get_active_text(), self.classChoices.get_active_text(), self.raceChoices.get_active_text(), self.stats)
+        character = charGen.character(self.systemChoices.get_active_text(), self.classChoices.get_active_text(), self.raceChoices.get_active_text())
 
         self.popup(character)
 
@@ -102,11 +97,11 @@ class chargen_ui:
         statStr = ""
         skillStr = ""
 
-        for x in range(0,len(character.skills)):
-            skillStr += character.skills[x][0] + " " + str(character.skills[x][1]) + ", " 
+        for x in character.skills.keys():
+            skillStr += x + " " + str(character.skills[x]) + ", " 
 
-        for i in range(0,len(character.charStats)):
-            statStr += character.charStats[i][0] + ": " + str(character.charStats[i][1]) + "\n" 
+        for i in character.charStats.keys():
+            statStr += i + ": " + str(character.charStats[i]) + "\n" 
 
         charStats.set_text(statStr)
         charSkills.set_text(skillStr)
