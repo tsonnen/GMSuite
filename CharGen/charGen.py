@@ -1,4 +1,4 @@
-''' 7/9/2016
+''' 7/11/2016
     v. .01
     Character Generator for a tabletop RPG
      
@@ -10,6 +10,12 @@ import random
 import string
 import json
 import os
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+import markov
+
+sys.path.pop(0)
 
 class character:
     def __init__(self, system, classChoice, race):
@@ -55,8 +61,8 @@ class character:
         for i in nameList:
             nameDict.update(dict(i))
 
-        
-        self.name = random.choice(nameDict[race])
+        markovNames = markov.markovname(nameDict[race], 2)
+        self.name = markovNames.generate()
 
     def get_skills(self):
         dataFile = open(os.path.dirname(os.path.realpath(__file__))
