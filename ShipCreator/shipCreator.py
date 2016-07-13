@@ -1,5 +1,5 @@
-''' 7/9/2016
-    v.01
+''' 7/12/2016
+    v/ 1.0
     Starship Generator for a tabletop RPG
 
     Creates a starship with the input of Type and size
@@ -11,6 +11,12 @@ import random
 import string
 import json
 import os
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+import markov
+
+sys.path.pop(0)
 
 class ship:
     def __init__(self, shipType):
@@ -39,6 +45,9 @@ class ship:
 
         self.size = infoDict[self.type]['size']
         self.classType = infoDict[self.type]['class']
+
+        markovNames = markov.markovname(dataList['names'], 2)
+        self.name = markovNames.generate()
 
         dataFile.close()
 

@@ -1,4 +1,4 @@
-'''7/8/2016
+'''7/12/2016
    A UI for creating a ship to be used in a Sci-Fi
    tabletop RPG.
 '''
@@ -57,6 +57,7 @@ class shipcreator_ui:
 
         popupWindow = popUpBuilder.get_object("ShipDisplay")
 
+        shipName = popUpBuilder.get_object("nameLbl")
         shipInfo = popUpBuilder.get_object("infoLbl")
         shipSpecial = popUpBuilder.get_object("specialLbl")
         shipArmor = popUpBuilder.get_object("armorLbl")
@@ -86,6 +87,7 @@ class shipcreator_ui:
             for item in weapon.mountContents:
                 weaponStr += "\t" + item + "\n"
 
+        shipName.set_text(ship.name)
         shipInfo.set_text(ship.type + " " + ship.size + " tons")
         shipArmor.set_text(ship.armor[0] + " : " + str(ship.armor[1]) + " protection")
         shipSpecial.set_text(specialStr)

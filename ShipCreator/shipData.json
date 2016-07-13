@@ -48,5 +48,31 @@
     ]},
 
     {"types": ["Pulse Laser", "Missle Rack", "Beam" ]}
-  ]
+  ],
+  "names":[
+    "The Betelgeuse Destroyer",
+    "The Kraicaidiian Bounty",
+    "The Chidhipoian Klolfaus",
+    "The Arcturus",
+    "The Staprista's Blossom",
+    "Boa",
+    "Damascus",
+    "Scythe",
+    "Genesis",
+    "Opal Star",
+    "Antagonist",
+    "Conscience",
+    "Phoenix",
+    "Conqueror",
+    "Conquistador",
+    "IcarusCordoba",
+    "Interceptor",
+    "Khan",
+    "Actium",
+    "SC Lifebringer",
+    "USS Reliant",
+    "STS Antioch",
+    "CS Star Opal",
+    "LWSS Unicorn"
+  ] 
 }

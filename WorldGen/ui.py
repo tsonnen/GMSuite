@@ -1,4 +1,4 @@
-''' 7/8/2016
+''' 7/12/2016
 
     V. 0.9
     Shows the UI for the world generation
@@ -41,6 +41,7 @@ class worldgen_ui:
 
         popupWindow = popUpBuilder.get_object("world_display")
 
+        worldName = popUpBuilder.get_object("nameLbl")
         worldSize = popUpBuilder.get_object("sizeLbl")
         worldAtmosphere = popUpBuilder.get_object("atmosphereLbl")
         worldTemperature = popUpBuilder.get_object("temperatureLbl")
@@ -54,13 +55,14 @@ class worldgen_ui:
         worldTravellers = popUpBuilder.get_object("travellersLbl")
         worldPsionics = popUpBuilder.get_object("psionicsLbl")
 
-        factionStr = ""
+        factionStr = "Factions:\n"
 
         for i in world.factions:
             factionStr += i[0] + " " + i[1] + "\n"
 
-        worldSize.set_text(world.size)
-        worldAtmosphere.set_text(world.atmosphere)
+        worldName.set_text(world.name)
+        worldSize.set_text("Diameter:" + world.size)
+        worldAtmosphere.set_text(world.atmosphere + " atmosphere")
         worldTemperature.set_text(world.temperature)
         worldHydrographics.set_text(world.hydrographics)
         worldGovernment.set_text(world.governmentType)

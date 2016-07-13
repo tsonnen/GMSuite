@@ -58,8 +58,8 @@ Author: Tim Sonnen
             <signal name="clicked" handler="close_clicked_cb" swapped="no"/>
           </object>
           <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">3</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">4</property>
           </packing>
         </child>
         <child>
@@ -69,7 +69,18 @@ Author: Tim Sonnen
             <property name="label" translatable="yes">Skills</property>
           </object>
           <packing>
-            <property name="left_attach">1</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="statsLbl">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Stats</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
             <property name="top_attach">2</property>
           </packing>
         </child>
@@ -81,29 +92,9 @@ Author: Tim Sonnen
             <property name="label" translatable="yes">Race</property>
           </object>
           <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="statsLbl">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Stats</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
+            <property name="left_attach">0</property>
             <property name="top_attach">1</property>
           </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
         </child>
       </object>
     </child>
