@@ -55,7 +55,7 @@ class chargen_ui:
         classList = dataList['classes']
 
         for i in classList:
-            self.classChoices.append_text(i.keys()[0])
+            self.classChoices.append_text(list(i.keys())[0])
 
         self.classChoices.set_active(0)
 
@@ -68,7 +68,7 @@ class chargen_ui:
         racesList = dataList['names']
         
         for i in racesList:
-             self.raceChoices.append_text(i.keys()[0])
+             self.raceChoices.append_text(list(i.keys())[0])
 
         self.raceChoices.set_active(0)
 
@@ -97,10 +97,10 @@ class chargen_ui:
         statStr = ""
         skillStr = ""
 
-        for x in character.skills.keys():
+        for x in list(character.skills.keys()):
             skillStr += x + " " + str(character.skills[x]) + ", " 
 
-        for i in character.charStats.keys():
+        for i in list(character.charStats.keys()):
             statStr += i + ": " + str(character.charStats[i]) + "\n" 
 
         charStats.set_text(statStr)

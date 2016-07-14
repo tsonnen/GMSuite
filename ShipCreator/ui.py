@@ -1,4 +1,4 @@
-'''7/12/2016
+'''7/13/2016
    A UI for creating a ship to be used in a Sci-Fi
    tabletop RPG.
 '''
@@ -39,7 +39,7 @@ class shipcreator_ui:
         types = dataList['types']
 
         for i in types:
-            self.typeChoice.append_text(i.keys()[0])
+            self.typeChoice.append_text(list(i.keys())[0])
 
         self.typeChoice.set_active(0)
 

@@ -1,4 +1,4 @@
-''' 7/11/2106
+''' 7/13/2106
 
     Generates a name based on a list of strings
     using a MArkov chain algorithm
@@ -26,7 +26,7 @@ class markovname:
 
     def generate(self, start = None, max_length = 20):
         if start == None:
-            s = random.choice(self.table.keys())
+            s = random.choice(list(self.table.keys()))
         else:
             s = start
         try:
